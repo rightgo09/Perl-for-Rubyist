@@ -83,3 +83,50 @@ end
 package Hoge {
 }
 ```
+
+### コンストラクタ
+
+- Perlにはない
+- なので別に好きな名前で作れるけれど、通常は「new」
+
+```ruby
+# ruby
+class Hoge
+end
+```
+```perl
+# perl
+package Hoge {
+  sub new {
+  }
+}
+```
+
+### リファレンス
+
+- Perlでいうオブジェクトとはリファレンスである
+- リファレンスとは参照である
+- 変数のリファレンスを得るには、変数の前にバックスラッシュ「\」を置くことで得られる
+- さらに **祝福する(bless)** ことによって、オブジェクトは自身が所属するクラスを記憶する
+- 通常コンストラクタでblessして、返却する
+- 8割がたハッシュのリファレンスがインスタンスとして使用される
+ - もちろん配列のリファレンス、スカラ変数のリファレンスもインスタンスとなりうる
+
+```ruby
+# ruby
+class Hoge
+end
+Hoge.new.class #=> Hoge
+```
+```perl
+# perl
+package Hoge {
+  sub new {
+    # bless(リファレンス, クラス名)、{}は無名ハッシュリファレンス、__PACKAGE__は現クラス名
+    my $self = bless {}, __PACKAGE__;
+    return $self;
+  }
+}
+# 組み込み関数refでリファレンスの所属クラス名を知る
+ref Hoge->new #=> Hoge
+```
