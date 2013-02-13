@@ -226,3 +226,34 @@ my $hoge = Hoge->new(123);
 $hoge->{foo} = 456;   # えっ！
 $hoge->foo; #=> 456   # えっ！！！！！
 ```
+
+### public / private
+
+- Perlでは、クラス内のメソッドは、 **すべてpublicである**
+- privateにするには、メソッドとしてではなく、メソッドのリファレンスをクラス内からしか見えない変数に入れることによって、まあ実現できる
+- 基本はでもpublic
+
+```ruby
+# ruby
+class Hoge
+  def foo; bar; end
+  def bar; 123; end
+  public  :foo
+  private :bar
+end
+hoge = Hoge.new
+hoge.foo #=> 123
+hoge.bar # NoMethodError: private method `bar' called for #<Hoge:0x007f8c530a1130>
+```
+```perl
+# perl
+package Hoge {
+  sub new { bless {}, __PACKAGE__ }
+  # クラス内レキシカル変数に無名サブルーチンのリファレンスを格納、レキシカル変数はクラス外から参照できない
+  my $bar = sub { 123 };
+  sub foo { $bar->() }  # サブルーチンリファレンスの実行
+}
+my $hoge = Hoge->new;
+$hoge->foo; #=> 123
+$hoge->bar; # Can't locate object method "bar" via package "Hoge"
+```
