@@ -257,3 +257,11 @@ my $hoge = Hoge->new;
 $hoge->foo; #=> 123
 $hoge->bar; # Can't locate object method "bar" via package "Hoge"
 ```
+
+ライブラリによるオブジェクト指向
+--------
+
+- 手作りの限界。「そうだ、CPANに行こう」
+- 鉄板
+ - Class::Accessor::*
+ - Moose / Mouse / Moo
