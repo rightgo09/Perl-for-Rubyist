@@ -172,3 +172,57 @@ Hoge->new(1, 2, 3)->hoge(4, 5, 6);
 #=> Hoge=HASH(0x7fcaf9026680) 4 5 6 at - line 7.
 # リファレンスを見ようとすると「クラス名=リファレンス元(メモリアドレス)」の表示になる
 ```
+
+### セッタ・ゲッタ
+
+- attr_accessorなんてものは（標準では）ない
+- 自作だとかなりだるい
+
+```ruby
+# ruby
+class Hoge
+  attr_accessor :foo   # セッタ・ゲッタ
+  def initialize(foo)
+    @foo = foo
+  end
+end
+hoge = Hoge.new(123)
+hoge.foo        #=> 123
+hoge.foo = 456
+hoge.foo        #=> 456
+```
+```perl
+# perl
+package Hoge {
+  sub new {
+    my ($class, $foo) = @_;
+    return bless { foo => $foo }, __PACKAGE__;
+  }
+  sub foo {
+    my $self = shift(@_);
+    # まだ引数がある ==> セッタとして扱う
+    if (@_) {
+      $self->{foo} = shift(@_); # ハッシュリファレンスの元値を更新
+    }
+    # 引数がない ==> ゲッタとして扱う
+    else {
+      return $self->{foo}
+    }
+  }
+  # もっと短く！
+  # sub foo { @_ > 1 ? $_[0]->{foo} = $_[1] : $_[0]->{foo} }
+}
+my $hoge = Hoge->new(123);
+$hoge->foo;        #=> 123
+$hoge->foo(456);   # Rubyの=のような糖衣構文（左辺代入）は用意しないと使えない、基本的に引数として渡す
+$hoge->foo;        #=> 456
+```
+
+- 実はこの手作りクラスだと、 **クラスの外側でセッタを通さずに直接プロパティの更新が可能である**
+- 性・善・説
+
+```perl
+my $hoge = Hoge->new(123);
+$hoge->{foo} = 456;   # えっ！
+$hoge->foo; #=> 456   # えっ！！！！！
+```
