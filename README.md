@@ -93,6 +93,7 @@ package Hoge {
 # ruby
 class Hoge
 end
+Hoge.new
 ```
 ```perl
 # perl
@@ -100,6 +101,7 @@ package Hoge {
   sub new {
   }
 }
+Hoge->new # 動くけどまだ無意味
 ```
 
 ### リファレンス
