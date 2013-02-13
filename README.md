@@ -265,3 +265,26 @@ $hoge->bar; # Can't locate object method "bar" via package "Hoge"
 - 鉄板
  - Class::Accessor::*
  - Moose / Mouse / Moo
+
+```ruby
+# ruby
+class Hoge
+  attr_accessor :foo
+  def initialize(foo)
+    @foo = foo
+  end
+end
+hoge = Hoge.new(123)
+hoge.foo #=> 123
+```
+
+### Class::Accessor::Fast
+
+```perl
+package Hoge {
+  use base 'Class::Accessor::Fast'; # Class::Accessor::Fastを継承
+  __PACKAGE__->mk_accessors('foo'); # クラスメソッドを呼び出す（メソッドを親クラスへ探索しに行く）
+}
+my $hoge = Hoge->new({ foo => 123 });
+$hoge->foo; #=> 123
+```
