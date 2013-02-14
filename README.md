@@ -85,6 +85,35 @@ package Hoge {
 }
 ```
 
+#### クラス名
+
+- Perlでも「::」は名前空間のセパレータとして使われるが、もっとゆるい
+- いきなり「Hoge::Fuga::Foo::Bar」というクラス名で宣言可能（Rubyのようにネストして宣言しなくてよい）
+- 基本的に、「::」で区切る最後の部分がファイル名になり、以前がディレクトリ名になる
+- **ファイル名は小文字に変換したりせず** 、「クラス名.pm」
+- useやrequireのロード時には、「::」はディレクトリセパレータとしても解釈される
+
+lib/hoge/fuga/foo/bar.rb
+```ruby
+# ruby
+class Hoge
+  class Fuga
+    class Foo
+      class Bar
+      end
+    end
+  end
+end
+Hoge::Fuga::Foo::Bar.new
+```
+lib/Hoge/Fuga/Foo/Bar.pm
+```perl
+# perl
+package Hoge::Fuga::Foo::Bar {
+}
+# ex. Hoge::Fuga::Foo::Bar->new()
+```
+
 ### コンストラクタ
 
 - Perlにはない
