@@ -287,6 +287,21 @@ $hoge->foo; #=> 123
 $hoge->bar; # Can't locate object method "bar" via package "Hoge"
 ```
 
+### 継承
+
+- 特殊変数@ISAに親クラス名を入れるだけ（かんたん！）
+- 基本は「baseモジュール」経由で継承する、もしくは「parentモジュール」
+
+```perl
+package Hoge {
+  sub new { bless {}, shift(@_) }
+}
+package Fuga {
+  our @ISA = ('Hoge'); # myではなくourでクラスに紐づく変数として使う
+}
+my $fuga = Fuga->new;
+```
+
 ライブラリによるオブジェクト指向
 --------
 
