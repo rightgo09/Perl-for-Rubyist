@@ -288,3 +288,19 @@ package Hoge {
 my $hoge = Hoge->new({ foo => 123 });
 $hoge->foo; #=> 123
 ```
+
+### Moo
+
+```perl
+package Hoge {
+  use Moo; # strict/warnings効果もある
+  # DSL
+  has 'foo' => (
+    is => 'rw',  # read/write
+  );
+}
+my $hoge = Hoge->new({ foo => 123 });
+$hoge->foo;       #=> 123
+$hoge->foo(456);
+$hoge->foo;       #=> 456
+```
