@@ -302,6 +302,19 @@ package Fuga {
 my $fuga = Fuga->new;
 ```
 
+- Perlは多重継承ができる
+- 多重継承の場合、メソッド探索は深さ優先になる
+
+```perl
+package Hoge {}
+package Fuga {}
+package Piyo { sub new { bless {}, shift(@_) } }
+package Foo {
+  our @ISA = ('Hoge', 'Fuga', 'Piyo');
+}
+my $foo = Foo->new;
+```
+
 ライブラリによるオブジェクト指向
 --------
 
