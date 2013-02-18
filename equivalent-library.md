@@ -1,10 +1,10 @@
 ライブラリ比較
 --------
 
-|Ruby|Perl
+　|Ruby|Perl
 --- | --- | ---
 インストール|rvm|perlbrew
-|rbenv|plenv
+　|rbenv|plenv
 ライブラリ|rubygems|CPAN
 (コマンド)|gem|cpan, cpanm
 バージョン管理|bundler|carton
