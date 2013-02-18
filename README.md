@@ -19,4 +19,5 @@ use warnings;
 
 * [変数について](https://github.com/rightgo09/Perl-for-Rubyist/blob/master/variable.md)
 * [オブジェクト指向について](https://github.com/rightgo09/Perl-for-Rubyist/blob/master/oop.md)
+* [ライブラリ比較](https://github.com/rightgo09/Perl-for-Rubyist/blob/master/equivalent-library.md)
 
