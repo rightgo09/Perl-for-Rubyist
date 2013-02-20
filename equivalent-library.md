@@ -9,4 +9,6 @@
 (コマンド)|gem|cpan, cpanm
 バージョン管理|bundler|carton
 WAF|Rails|Catalyst
-
+テスト||Test::More
+xUnit|Test::Unit|Test::Class
+テストフレームワーク|RSpec|
