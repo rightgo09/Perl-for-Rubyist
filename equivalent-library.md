@@ -16,3 +16,4 @@ WWWサーバ|Unicorn|Starman
 テスト||Test::More
 xUnit|Test::Unit|Test::Class
 テストフレームワーク|RSpec|
+End-to-End|Capybara|
