@@ -8,11 +8,12 @@ RubyistのためのPerl
 とりあえずPerlを書く時は
 --------
 
-- strict/warningsプラグマを各ファイルの先頭に書くべし
+- strict/warnings/utf8プラグマを各ファイルの先頭に書くべし
 
 ```perl
 use strict;
 use warnings;
+use utf8;
 ```
 
 ## 項目
